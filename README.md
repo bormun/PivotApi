@@ -64,6 +64,36 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # PivotApi
-Instrucciones:
+
+<h2>Instrucciones:</h2>
 
 
+<h3>Listar las imágenes (unicamente las que poseen un formato base64 correcto):</h3>
+<b>GET</b> https://pivotapi.bormun.com/api/v1/images
+
+<br>
+<h3>Obtener una sola imagen por id:</h3>
+<b>GET</b> https://pivotapi.bormun.com/api/v1/images/25
+
+<br>
+<h3>Almacenar una imagen nueva:</h3>
+<b>POST</b> https://pivotapi.bormun.com/api/v1/images
+<pre>
+    body:
+    {
+        "nombre" : /*Nombre del archivo*/,
+        "archivo" : /*Archivo de imagen*/
+    }
+</pre>
+
+<br>
+<h3>Actualizar la informacion de un archivo por id:</h3>
+
+<b>POST</b> https://pivotapi.bormun.com/api/v1/images/25
+<pre>
+{
+    "nombre" : /*Nombre del archivo*/,
+    "archivo" : /*Archivo de imagen*/,
+    "_method" : "PUT" /*Para indicar a laravel que es un methodo put*/
+}
+</pre>
