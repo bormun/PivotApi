@@ -14,14 +14,10 @@ jobs:
         # - uses: actions/checkout@main
         - uses: actions/checkout@v2
 
-        # - name: Install dependencies
-        #   run: composer install --prefer-dist --no-progress
-        #
-        # - name: deploy
-        #   env:
-        #     base_directory: "/var/www/pivotapi.com"
-        #     ssh_user: "pivotapi"
-        #     ssh_host: "142.93.244.116"
-        #     ssh_port: 22
-        #     private_ssh_key: "${{ secrets.SSH_KEY }}"
-        #   run: .github/deployment/deploy.sh
+        - name: Deploy to production
+          uses: appleboy/ssh-action@master
+          with:
+            username: pivotapi
+            host: 142.93.244.116
+            password: ${{ secrets.SSH_PASSWORD }}
+            script: 'cd /var/www/pivotapi.com && .github/deployment/deploy.sh'
