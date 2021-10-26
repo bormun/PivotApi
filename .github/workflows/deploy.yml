@@ -1,0 +1,34 @@
+name: Deploy pivotapi
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+    - uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+      
+    - name: deploy
+      env:
+        base_directory: "/var/www/pivotapi.com"
+        ssh_user: "pivotapi"
+        ssh_host: "142.93.244.116"
+        ssh_port: 22
+        private_ssh_key: "${{ secrets.SSH_KEY }}"
+      run: .github/deployment/deploy.sh
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    # - name: Run test suite
+    #   run: composer run-script test
